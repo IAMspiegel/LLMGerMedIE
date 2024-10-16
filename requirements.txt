@@ -1,0 +1,12 @@
+transformers==4.29.2
+accelerate==0.20.3
+peft==0.4.0
+nvidia-ml-py3==7.352.0
+spacy~=3.2.6
+datasets==2.14.6
+bitsandbytes==0.39.0
+evaluate
+seqeval
+PyYAML==6.0.1
+nervaluate==0.1.8
+python-docx==1.1.0

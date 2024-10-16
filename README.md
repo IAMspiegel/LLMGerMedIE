@@ -10,7 +10,7 @@ The package is structured as follows:
 - **ggponc**: `GGPONC v2` related dataset preprocessing
 - **instructionTuning**: scripts to train (`train_instruction.py`) and predict (`pred_data.py`) LLMs with predefined instruction datasets. Moreover, methods to transform NER datasets into instruction tuning ready format, see below.
 
-## DataSets
+## Datasets
 In order to reproduce results and instruction tune LLMs the following datasets must be acquired:
 #### Instruction Tuning Dataset
 - <b>GERNERMED</b> https://github.com/frankkramer-lab/GERNERMED/tree/main/data
@@ -23,8 +23,8 @@ In order to reproduce results and instruction tune LLMs the following datasets m
 - <b>CARDIO:DE</b> https://heidata.uni-heidelberg.de/dataset.xhtml?persistentId=doi:10.11588/data/AFYQDY
 
 ## Transform Data
-All methods to transform NER datasets into the instruction schema with Instruction, Input, Response can be found under `medicaNLP.instructionTuning.build_instruct_data`.
-The stored hugginface instruction datasets can be used to instruction tune any LLM.
+All methods to transform NER datasets into the instruction schema (**Instruction**, **Input**, **Response**) can be found under `medicaNLP.instructionTuning.build_instruct_data`.
+The stored huggingface instruction datasets can be used to fine-tune any LLM.
 
 ```python
 # Example to transform datasets
@@ -42,10 +42,31 @@ train_instruct = dataset_to_huggingface_dataset(train_instruct)
 ```
 
 ## Install
+Activate python environment
+```bash
+source venv/bin/activate
+```
+Move to repository directory and install requirements
+```bash
+cd path/to/LLMGerMedIE
+pip install -r requirements.txt
+```
 
+Install medicaNLP
+```bash
+pip install -e .
+```
 
 ## Instruction Tuning
-To fine tune the LLM use the `medicaNLP.instructionTuning.train_instruction.py` script. Make sure to configure the relevant model and data paths. The script can be run in the background as follows: `nohup python3 train_instruction.py &`. To investigate training validation use the methods in `medicaNLP.instructionTuning.validate_train.py`.
+To fine tune the LLM use the `medicaNLP.instructionTuning.train_instruction.py` script. Make sure to configure the relevant model and data paths. The script can be run in the background as follows:
+```bash
+nohup python3 train_instruction.py &
+```
+To investigate training validation use the methods in `medicaNLP.instructionTuning.validate_train.py`.
 
 ## Predict
-To extract clinical information from a given data sample with an LLM use the `medicaNLP.instructionTuning.pred_data.py` method. To evaluate the extracted entities based on test samples use the dataset specific methods in `medicaNLP.instructionTuning.evaluate.py`.
+To extract clinical information from a given data sample with an LLM use
+```bash
+nohup python3 medicaNLP.instructionTuning.pred_data.py &
+```
+To evaluate the extracted entities based on test samples use the dataset specific methods in `medicaNLP.instructionTuning.evaluate.py`.
